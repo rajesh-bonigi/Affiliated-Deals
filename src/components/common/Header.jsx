@@ -70,7 +70,7 @@ const Header = () => {
                <button 
              // onClick={() => setShowSearch(!showSearch)}
                   
-                className=" p-2 text-gray-600 hover:text-red-600 transition-colors"
+                className=" md:hidden p-2 text-gray-600 hover:text-red-600 transition-colors"
                 aria-label="Search"
                 
               >
@@ -109,7 +109,7 @@ const Header = () => {
               <ShoppingBag className="w-5 h-5" />
             </button>
             <button 
-              className="p-2 text-gray-600 hover:text-red-600 transition-colors"
+              className="md:hidden p-2 text-gray-600 hover:text-red-600 transition-colors"
               aria-label="Account"
             >
               <User className="w-5 h-5" />
@@ -118,7 +118,7 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className=" p-2 text-gray-600"
+              className=" md:hidden p-2 text-gray-600"
               aria-label="Menu"
             >
               {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

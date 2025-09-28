@@ -60,8 +60,8 @@ const DealCard = ({ deal, isFavorite, onToggleFavorite }) => {
         {/* Pricing */}
         <div className="mb-4">
           <div className="flex items-baseline space-x-3 mb-2">
-            <span className="text-2xl font-bold text-green-600">{formatPrice(deal.salePrice)}</span>
-            <span className="text-lg text-gray-400 line-through">{formatPrice(deal.originalPrice)}</span>
+            <span className="text-2xl font-bold text-black-600">{formatPrice(deal.salePrice)}</span>
+            <span className="text-lg text-gray-400 line-through decoration-red-500">{formatPrice(deal.originalPrice)}</span>
           </div>
           <div className="flex items-center justify-between text-sm">
             <span className="text-green-600 font-semibold">
@@ -83,7 +83,7 @@ const DealCard = ({ deal, isFavorite, onToggleFavorite }) => {
             <span>Get Deal</span>
             <ExternalLink className="w-4 h-4" />
           </button>
-          <button className="px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="md:hidden px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
             <Eye className="w-5 h-5 text-gray-600" />
           </button>
         </div>
