@@ -64,8 +64,10 @@ const Header = () => {
 
           {/* Actions */}
             <div className="flex items-right space-x-6">
-               <div className="absoulte right-12 ml-8">
+               <div className="absoulte bottom-3 ml-8">
+               <div className="w-96 h-6">
               <SearchBar compact={true} />
+                   </div>
                    </div>
                <button 
              // onClick={() => setShowSearch(!showSearch)}

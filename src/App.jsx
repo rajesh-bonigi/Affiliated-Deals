@@ -71,17 +71,17 @@ const App = () => {
               </div> 
                <div className="flex items-center space-x-1 mt-1 sm:mt-0">
                 <div className="flex items-center space-x-2">
-                  <label className="text-sm font-medium text-gray-700">Sort by:</label>
-                  <select
+                 {/*  <label className="text-sm font-medium text-gray-700">Sort by:</label> */}
+                 {/*  <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="trending">Trending</option>
                     <option value="discount">Biggest Discount</option>
                     <option value="price">Lowest Price</option>
                     <option value="rating">Highest Rating</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>  
             </div> 
