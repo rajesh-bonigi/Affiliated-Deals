@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 
 const SearchBar = ({ onClose, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Comprehensive list of search suggestions
+  const searchBarRef = useRef(null); // ⬅️ For detecting outside clicks
+
+  // Detect outside click to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const allSearches = [
     'Laptops under $500',
     'Laptop deals',
@@ -44,25 +59,17 @@ const SearchBar = ({ onClose, onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      if (onSearch) {
-        onSearch(searchQuery);
-      }
+      onSearch?.(searchQuery);
       setShowSuggestions(false);
-      if (onClose) {
-        onClose();
-      }
+      onClose?.();
     }
   };
 
   const handleSuggestionClick = (suggestion) => {
     setSearchQuery(suggestion);
-    if (onSearch) {
-      onSearch(suggestion);
-    }
+    onSearch?.(suggestion);
     setShowSuggestions(false);
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
 
   const handleClear = () => {
@@ -78,15 +85,14 @@ const SearchBar = ({ onClose, onSearch }) => {
     }
   };
 
-  // Filter suggestions based on search query
   const filteredSuggestions = searchQuery.trim()
     ? allSearches.filter(item =>
         item.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : allSearches.slice(0, 8); // Show first 8 when empty
+    : allSearches.slice(0, 8);
 
   return (
-    <div className="relative max-w-2xl mx-auto">
+    <div ref={searchBarRef} className="relative max-w-2xl mx-auto">
       <div className="relative">
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
         <input
@@ -111,7 +117,6 @@ const SearchBar = ({ onClose, onSearch }) => {
         )}
       </div>
 
-      {/* Suggestions Dropdown */}
       {showSuggestions && filteredSuggestions.length > 0 && (
         <div className="absolute w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
           <div className="py-2">
@@ -127,7 +132,6 @@ const SearchBar = ({ onClose, onSearch }) => {
                 <Search className="w-4 h-4 text-gray-400" />
                 <span>
                   {searchQuery ? (
-                    // Highlight matching text
                     <span>
                       {suggestion.split(new RegExp(`(${searchQuery})`, 'gi')).map((part, i) =>
                         part.toLowerCase() === searchQuery.toLowerCase() ? (
@@ -144,8 +148,7 @@ const SearchBar = ({ onClose, onSearch }) => {
               </button>
             ))}
           </div>
-          
-          {/* No results message */}
+
           {searchQuery && filteredSuggestions.length === 0 && (
             <div className="px-4 py-8 text-center text-gray-500">
               No suggestions found for "{searchQuery}"
