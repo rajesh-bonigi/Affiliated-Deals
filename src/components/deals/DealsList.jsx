@@ -13,7 +13,7 @@ const DealsList = ({ deals, favorites, toggleFavorite, isFavorite }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+    <div className="grid grid-cols-12 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-1">
       {deals.map(deal => (
         <DealCard
           key={deal.id}

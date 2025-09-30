@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Search, Menu, X, Heart, ShoppingBag, User, MapPin } from 'lucide-react';
 import SearchBar from './SearchBar';
+
+
 const WhatsAppIcon = ({ className }) => (
   <svg 
     className={className} 
@@ -24,7 +26,8 @@ const InstagramIcon = ({ className }) => (
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showSearch, setShowSearch] = useState(true);
+  const [showSearch, setShowSearch] = useState(false);
+   const [searchResults, setSearchResults] = useState(null);
 
   const navigation = [
     { name: "Electronics", href: "#electronics" },
@@ -33,7 +36,18 @@ const Header = () => {
     { name: "Health & Beauty", href: "#health" },
     { name: "Sports", href: "#sports" },
   ];
-
+const handleSearch = (query) => {
+    console.log('Searching for:', query);
+    setSearchResults(query);
+    // Here you would typically:
+    // 1. Filter your products/deals based on the query
+    // 2. Navigate to a search results page
+    // 3. Make an API call to fetch search results
+    // 4. Update your app state with filtered results
+    
+    // Example: You could emit an event or use a context to update the main app
+    // window.dispatchEvent(new CustomEvent('search', { detail: query }));
+  };
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
     
@@ -70,7 +84,7 @@ const Header = () => {
                    </div>
                    </div>
                <button 
-             // onClick={() => setShowSearch(!showSearch)}
+             onClick={() => setShowSearch(!showSearch)}
                   
                 className=" md:hidden p-2 text-gray-600 hover:text-red-600 transition-colors"
                 aria-label="Search"
@@ -128,13 +142,29 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Search Bar */}
-        {showSearch && (
-          <div className="md:hidden pb-4">
-            <SearchBar onClose={() => setShowSearch(true)} />
-          </div>
-        )}
-
+         {/* Search Bar */}
+                {showSearch && (
+                  <div className="pb-4">
+                    <SearchBar 
+                      onClose={() => setShowSearch(false)} 
+                      onSearch={handleSearch}
+                    />
+                  </div>
+                )}
+        
+                {/* Search Results Indicator (optional) */}
+                {searchResults && !showSearch && (
+                  <div className="py-2 text-sm text-gray-600">
+                    Showing results for: <span className="font-semibold text-red-600">{searchResults}</span>
+                    <button 
+                      onClick={() => setSearchResults(null)}
+                      className="ml-2 text-gray-400 hover:text-gray-600"
+                    >
+                      <X className="w-4 h-4 inline" />
+                    </button>
+                  </div>
+                )}
+                
         {/* Mobile Navigation */}
         {showMobileMenu && (
           <div className="md:hidden py-4 border-t">

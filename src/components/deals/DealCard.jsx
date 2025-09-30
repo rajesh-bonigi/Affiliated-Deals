@@ -40,7 +40,14 @@ const DealCard = ({ deal, isFavorite, onToggleFavorite }) => {
 
         {/* Product Info */}
         <div className="text-center">
-          <div className="text-[150px] text-center mb-4">{deal.image}</div>
+        {/* <div className="text-[154px] text-center mb-4">{deal.image}</div> */}
+<div className="text-[150px] flex items-center justify-center mx-auto mb-4 transition-all duration-300 hover:scale-105 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]">
+  {deal.image}
+</div>
+           <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <span className="font-small text-gray-600">{deal.store}</span> 
+             
+            </div>
           <div className="flex-1 min-w-0">
            <button
             onClick={handleGetDeal}
@@ -84,11 +91,7 @@ const DealCard = ({ deal, isFavorite, onToggleFavorite }) => {
             </div>
           </div>
         </div>
-         <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <span className="font-small text-gray-600">{deal.store}</span>
-            
-             
-            </div>
+        
 
         {/* Action Buttons */}
         <div className="flex space-x-3">
